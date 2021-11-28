@@ -1,3 +1,8 @@
+import com.github.sh0nk.matplotlib4j.Plot;
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
+import com.github.sh0nk.matplotlib4j.builder.ScaleBuilder;
+
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
 public class SumProblem {
@@ -9,7 +14,7 @@ public class SumProblem {
     BigInteger startPoint = BigInteger.ONE;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PythonExecutionException, IOException {
 
         SumProblem sum = new SumProblem();
         System.out.println("Hello, you math freak!");
@@ -17,7 +22,6 @@ public class SumProblem {
         Scanner sc=new Scanner(System.in);
         BigInteger a= sc.nextBigInteger();
         sum.processing();
-
 
         sum.StartSequenz(a);
 
@@ -29,7 +33,7 @@ public class SumProblem {
         System.out.print("Processing");
         String out = "";
 
-        int i = 5;
+        int i = 2;
         while (i>0){
             try {
                 i--;
@@ -50,7 +54,15 @@ public class SumProblem {
     }
 
 
-    private void StartSequenz(BigInteger startPoint){
+    private void StartSequenz(BigInteger startPoint) throws PythonExecutionException, IOException {
+        Plot plt = Plot.create();
+
+        plt.xlabel("xlabel");
+        plt.ylabel("ylabel");
+        //plt.text(100, 100, "text");
+
+        //plt.xscale(ScaleBuilder.Scale.valueOf("100"));
+        plt.title("Title!");
 
         System.out.println(startPoint);
         this.startPoint = startPoint;
@@ -64,9 +76,16 @@ public class SumProblem {
 
                 startPoint = (startPoint.divide(BigInteger.TWO));
             }
+            plt.plot()
+                    .add(Arrays.asList(startPoint))
+                    .label("label")
+                    .linestyle("--");
+
             System.out.println(startPoint);
 
         }
+        plt.legend();
+        plt.show();
 
     }
 }
