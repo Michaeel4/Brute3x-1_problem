@@ -13,7 +13,8 @@ public class SumProblem {
 
     BigInteger startPoint = BigInteger.ONE;
 
-
+    private int countEven = 0;
+    private int countOdd = 0;
     public static void main(String[] args) throws PythonExecutionException, IOException {
 
         SumProblem sum = new SumProblem();
@@ -71,21 +72,20 @@ public class SumProblem {
             if(startPoint.mod(BigInteger.TWO).compareTo(BigInteger.ZERO) != 0){
 
                 startPoint = (startPoint.multiply(BigInteger.valueOf(3))).add(BigInteger.ONE);
-
+                countOdd++;
             } else {
 
                 startPoint = (startPoint.divide(BigInteger.TWO));
+                countEven++;
             }
-            plt.plot()
-                    .add(Arrays.asList(startPoint))
-                    .label("label")
-                    .linestyle("--");
+
 
             System.out.println(startPoint);
 
         }
-        plt.legend();
-        plt.show();
+
+        System.out.println("overall even: " + countEven + " " + "overall odd: " + countOdd);
+
 
     }
 }
